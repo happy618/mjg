@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>蘑菇街-我的买手街！</title>
+	<link rel="stylesheet" href="mgj.css">
+	<script>
+		window.onload=function (){
+
+			var oLi1=document.getElementById('hea-li1')
+			var oLi2=document.getElementById('hea-li2')
+			var oUl1=oLi1.getElementsByTagName('ul')[0]
+			var oUl2=oLi2.getElementsByTagName('ul')[0]
+			var oSlist=document.getElementById('ssplist')
+			var oSli=document.getElementById('sspli')
+			var oSul=oSli.getElementsByTagName('ul')[0]
+			var aSa=oSul.getElementsByTagName('li')
+			var oSp1=oSli.getElementsByTagName('p')[0]
+			var oMenu=document.getElementById('menu')
+			var oSecleft=document.getElementById('secleft')
+			var aHidmenu=oSecleft.getElementsByTagName('div')
+		    var aMul=oMenu.getElementsByTagName('ul')
+		    var timer=null;
+//导航栏鼠标移入显示移出隐藏事件
+			oLi1.onmouseover=function (){
+				oUl1.style.display='block'
+			}
+			oLi1.onmouseout=function (){
+				oUl1.style.display='none'
+			}
+			oLi2.onmouseover=function (){
+				oUl2.style.display='block'
+			}
+			oLi2.onmouseout=function (){
+				oUl2.style.display='none'
+			}
+
+			
+//搜索框店铺商品移入切换事件			
+			oSli.onmouseover=function(){
+				oSul.style.display='block'
+			}
+			oSli.onmouseout=function(){
+				oSul.style.display='none'
+			}
+			for(var i=0;i<aSa.length;i++){
+				aSa[i].index=i;
+				aSa[i].onclick=function (){
+					oSp1.innerHTML='搜'+this.innerHTML;
+					oSul.style.display='none';
+				}	
+
+
+
+		}
+
+//鼠标移入侧面菜单显示隐藏分菜单事件（定时器）
+		for(var i=0;i<aMul.length;i++){
+
+						aMul[i].index=i;
+						aMul[i].onmouseover=function(){
+
+							clearInterval(timer)
+							for(var j=1;j<aHidmenu.length;j++){
+
+								aHidmenu[j].style.display='none'
+
+								
+							}
+								aHidmenu[this.index+1].style.display='block';
+
+						
+							
+
+							
+						}
+						function fn(num){
+							aMul[num].onmouseout=function (){				
+
+						timer=setTimeout(function(){aHidmenu[num+1].style.display='none';},500)
+
+							
+									}
+
+						}
+						for(j=0;j<aMul.length;j++){
+							fn(j)
+						}
+						
+					
+					}
+		
+//鼠标移入隐藏菜单显示，移出隐藏函数		
+
+	         for(var k=1;k<aHidmenu.length;k++){
+
+							aHidmenu[k].index=k;
+							aHidmenu[k].onmouseover=function(){
+
+								clearInterval(timer)//清除左边菜单的定时器
+								for(var j=1;j<aHidmenu.length;j++){
+
+									aHidmenu[j].style.display='none'
+
+									
+								}
+									aHidmenu[this.index].style.display='block'														
+							}
+							aHidmenu[k].onmouseout=function(){
+								aHidmenu[this.index].style.display='none'
+								
+							}
+						}
+
+//中间图片切换函数					
+			function move(){
+				var oMove=document.getElementById('move');
+			var oMoveimg=oMove.getElementsByTagName('img')[0]
+			var oMovebutl=document.getElementById('left')
+			var oMovebutr=document.getElementById('right')
+			var oMoveul=oMove.getElementsByTagName('ul')[0];
+			var aMoveli=oMoveul.getElementsByTagName('li');
+			var arrimg=['img/z1.jpg','img/z2.jpg','img/z3.jpg','img/z4.jpg','img/z5.jpg','img/z6.jpg']
+			var num=0;
+			var display=null;
+			var timer2=null;
+		
+				timer2=setInterval(function(){
+				
+				num++;
+				
+					if (num==arrimg.length) {
+						num=0
+					}
+					oMoveimg.src=arrimg[num]
+					for(i=0;i<aMoveli.length;i++){
+						aMoveli[i].className=''
+					}
+					aMoveli[num].className='hover'
+
+
+			},5000)
+				oMove.onmouseover=function(){
+					clearInterval(timer2)
+				}
+				oMove.onmouseout=function(){
+					timer2=setInterval(function(){
+				
+				num++;
+				
+					if (num==arrimg.length) {
+						num=0
+					}
+					oMoveimg.src=arrimg[num]
+					for(i=0;i<aMoveli.length;i++){
+						aMoveli[i].className=''
+					}
+					aMoveli[num].className='hover'
+
+			},5000)
+				}
+			
+			
+			
+		
+
+			
+			oMovebutl.onclick=function(){
+					num--;
+					if (num==-1) {
+						num=arrimg.length-1
+					}
+					
+					oMoveimg.src=arrimg[num]
+					for(i=0;i<aMoveli.length;i++){
+						aMoveli[i].className=''
+					}
+					aMoveli[num].className='hover'
+
+			}
+
+			oMovebutr.onclick=function(){
+
+					num++;
+				
+					if (num==arrimg.length) {
+						num=0
+					}
+					oMoveimg.src=arrimg[num]
+					for(i=0;i<aMoveli.length;i++){
+						aMoveli[i].className=''
+					}
+					aMoveli[num].className='hover'
+
+			}
+			
+
+			for(var i=0;i<aMoveli.length;i++){
+				aMoveli[i].index=i;
+				aMoveli[i].onmouseover=function(){
+					oMoveimg.src=arrimg[this.index];
+					for(var i=0;i<aMoveli.length;i++ ){
+						aMoveli[i].className=''
+					}
+					this.className='hover';
+					num=this.index;
+				}
+
+			}
+			function movefn(obj){
+				obj.onmouseover=function(){
+				clearInterval(display)
+				oMovebutl.style.display='block';
+				oMovebutr.style.display='block';
+			}
+			obj.onmouseout=function(){
+				display=setTimeout(function(){
+				oMovebutl.style.display='none';
+				oMovebutr.style.display='none';
+			},500)
+				
+			}
+			}
+	
+			movefn(oMoveimg);
+			movefn(oMovebutr);
+			movefn(oMovebutl)
+			}
+			
+		move()
+//倒计时抢购
+			var oTimeul=document.getElementById('timebuy')
+			var aTimeli=oTimeul.getElementsByTagName('li')
+			var num1=0;
+			var num2=0;
+			var num3=0;
+			var second=parseInt(aTimeli[4].innerHTML)
+			var minute=parseInt(aTimeli[2].innerHTML)
+			var hour=parseInt(aTimeli[0].innerHTML)
+
+			setInterval(Time,1000)
+
+			function Time(){
+				num1++;
+				aTimeli[4].innerHTML=second-num1;
+				if (num1==59) {
+					num1=0;
+					num2++;
+				aTimeli[2].innerHTML=minute-num2;
+				if (num2==59) {
+					num2=0;
+					num3++;
+					aTimeli[0].innerHTML=hour-num3;
+					if (num3==23) {
+						aTimeli[4].innerHTML=0;
+						aTimeli[2].innerHTML=0;
+						aTimeli[0].innerHTML=0;
+					}
+				}		
+				}
+			}
+var oHidser=document.getElementById('hidser')
+var oHidul=document.getElementById('hidul')
+var aSli=oHidul.getElementsByTagName('li')
+var oSp=document.getElementById('sp')
+var oSerli=document.getElementById('serli')
+var oTop=document.getElementById('top')
+var oaside=document.getElementById('aside')
+var oasideUl=oaside.getElementsByTagName('ul')[0]
+var aasideLi=oasideUl.getElementsByTagName('li')
+
+			oSerli.onmouseover=function(){
+				oHidul.style.display='block'
+			}
+			oSerli.onmouseout=function(){
+				oHidul.style.display='none'
+			}
+			for(var i=0;i<aSli.length;i++){
+				aSli[i].index=i;
+				aSli[i].onclick=function (){
+					oSp.innerHTML='搜'+this.innerHTML;
+					oHidul.style.display='none';
+				}	
+
+
+
+		}
+	window.onscroll=function(){
+		 var t = document.documentElement.scrollTop ||document.body.scrollTop;
+		if (t>500) {
+			oHidser.style.display='block'
+		}
+		else{
+			oHidser.style.display='none'
+		}
+		if (t>10) {
+			oTop.style.display='block'
+		}
+		else{
+			oTop.style.display='none'
+		}
+	}
+
+
+	}
+	</script>
+</head>
+<body>
+
+	<header class="header">
+<!-- 导航栏 -->
+		<div class="hea-top" id="top1">
+			<ul class="hea-top-ul">
+				<li>注册</li>
+				<li>登录</li>
+				<li class="li">我的订单</li>
+				<li class="li">购物车</li>
+				<li class="li" id="hea-li1"> <a href="#" title="">客户服务</a>
+					<ul class="hea-top-ul-li-ul1">
+						<li >消费者服务</li>
+						<li>商家中心</li>
+						<li >服务中心</li>
+					</ul>
+				</li>
+				<li class="li" id="hea-li2"> <img src="img/小店.png" alt="" ><a href="#">我的小店</a>
+					<ul class="hea-top-ul-li-ul2">
+						<li>管理后台</li>
+						<li>商家社区</li>
+						<li>商家培训</li>
+						<li>市场入驻</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+	<div class="hea-bot" >
+			<div class="img"><img src="img/蘑菇街.png" alt="" id="mgj"></div>
+			<div class="sercher">
+				<div class="ul" >
+					<ul>
+						<li id="sspli"><p id="sp1">搜商品</p><img src="img/向下箭头.gif" alt="">
+							<ul>
+								<li>商品</li>
+								<li>店铺</li>
+							</ul>
+						</li>
+					</ul>
+			</div>
+
+			<div class="input">
+				<input type="text" value="夏季凉鞋穿搭" onfocus="if (value=='夏季凉鞋穿搭') {value=''}" onblur="if (value=='') {value='夏季凉鞋穿搭'}" ="">
+			</div>
+			<div class="img2"><img src="img/搜索.jpg" alt="" class="img2" width="70px" height="36px;"></div>
+			</div>
+							
+
+			<div class="hea-bot-list">
+				<ul >
+							<li>防晒</li>
+							<li>连衣裙</li>
+							<li>凉鞋</li>
+							<li>小白鞋</li>
+							<li>衬衫</li>
+							<li>阔腿裤</li>
+							<li>牛仔短裤</li>
+							<li>墨镜</li>
+							<li>夏季套装</li>
+
+
+						</ul>
+			</div>
+			
+			<div class="saoma">
+				<img src="img/扫码.gif" alt="">
+			</div>
+		</div>
+</header>
+
+	<section>
+
+		<section class="section-one">
+<!-- 菜单轮播图主页 -->
+			<div class="sec-one-allcomm">
+				全部商品
+			</div>
+			<ul class="tgkq">
+				<li>团购</li>
+				<li>快抢</li>
+			</ul>
+
+			<div class="sec-one-left" id="secleft">
+				<div class="menu" id="menu">
+					<ul class="ul1">
+						<li class="li1">上衣</li>
+						<li class="li2">19元起</li>
+						<li class="li3">时尚套装</li>
+						<li class="li4">T恤</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">裙子</li>
+						<li class="li2">热销榜</li>
+						<li class="li3">连衣裙</li>
+						<li class="li4">蕾丝裙</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">裤子</li>
+						<li class="li2">夏上新</li>
+						<li class="li3">牛仔裤</li>
+						<li class="li4">阔腿裤</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">内衣</li>
+						<li class="li2">夏上新</li>
+						<li class="li3">睡衣套装</li>
+						<li class="li4">内裤</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">鞋子</li>
+						<li class="li2">夏新品</li>
+						<li class="li3">凉鞋</li>
+						<li class="li4">单鞋</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">男友</li>
+						<li class="li2">短裤</li>
+						<li class="li3">帆布鞋</li>
+						<li class="li4">T恤</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">包包</li>
+						<li class="li2">夏上新</li>
+						<li class="li3">双肩</li>
+						<li class="li4">斜跨</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">运动</li>
+						<li class="li2">运动套装</li>
+						<li class="li3">防晒衣</li>
+						<li class="li4">运动鞋</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">美妆</li>
+						<li class="li2">超值套装</li>
+						<li class="li3">面膜</li>
+						<li class="li4">BB霜</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">配饰</li>
+						<li class="li2">墨镜</li>
+						<li class="li3">棒球帽</li>
+						<li class="li4">项链</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">家居</li>
+						<li class="li2">新品</li>
+						<li class="li3">四件套</li>
+						<li class="li4">小家具</li>
+					</ul>
+					<ul class="ul1">
+						<li class="li1">母婴</li>
+						<li class="li2">夏季新品</li>
+						<li class="li3">童装</li>
+						<li class="li4">孕妇装</li>
+					</ul>
+				</div>
+
+
+				<div class="hid-menu" id="hidmenu1">
+					<ul class="hid-ul ul1">
+						<li>新品发布</li><li>衬衫</li><li>针织衫</li><li>字母T恤</li><li>绑带衬衫</li><li>俏皮露肩</li><li>夏日花卉</li>	
+					</ul>
+					<ul class="hid-ul ul2">
+					<li>当季热卖</li><li>短款上衣</li><li>纯色T恤</li><li>开衫</li><li>薄外套</li><li>蕾丝衫</li><li>雪纺衬衫</li><li>清凉透视</li><li>运动套装</li><li>格纹衬衫</li><li>情侣装</li>
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>新品发布</li><li>条纹</li><li>一字领</li><li>印花</li><li>流苏</li><li>字母</li><li>蕾丝</li><li>系带</li><li>荷叶边</li><li>性感V领</li><li>时尚挂脖</li><li>前短后长</li>
+					</ul>
+					
+						<img src="img/m13.jpg" alt="">
+				</div>
+
+				<div class="hid-menu" id="hidmenu2">
+					<ul class="hid-ul ul1">
+						<li>新品发布</li><li>韩范美裙</li><li>初夏新品</li><li>收腰裙</li><li>半身裙</li><li>牛仔裙</li><li>衬衫裙</li><li>百褶裙</li><li>包臀裙</li><li>大码裙子</li><li>长袖连衣裙</li><li>卫衣裙</li>
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>当季热卖</li><li>裙子套装</li><li>连衣裙</li><li>蕾丝裙</li><li>T恤裙</li><li>背带裙</li><li>小白裙</li><li>气质美裙</li><li>伞裙</li><li>针织裙</li><li>长裙</li>						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>女神最爱</li><li>甜美</li><li>时尚套装</li><li>韩范</li><li>气质</li><li>清新女神</li><li>一步裙</li><li>飘逸长裙</li><li>流苏</li>						
+					</ul>
+					
+						<img src="img/menu3.jpg" alt="">				
+					
+				</div>
+
+				<div class="hid-menu" id="hidmenu3">
+					<ul class="hid-ul ul1">
+						<li>新品发布</li><li>显瘦裤子榜</li><li>小脚裤</li><li>打底裤</li><li>阔腿裤</li><li>高腰裤</li><li>休闲裤</li><li>背带裤</li><li>大码裤子</li>					
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>当季热卖</li><li>破洞牛仔裤</li><li>磨边牛仔裤</li><li>显瘦牛仔裤</li><li>小脚牛仔裤</li><li>高腰牛仔裤</li><li>牛仔背带裤</li><li>黑色牛仔裤</li><li>纯棉打底裤</li><li>显瘦休闲裤</li>
+						
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>流行元素</li><li>修身显瘦</li><li>喇叭</li><li>韩版</li><li>纯棉</li><li>高腰</li><li>直筒</li><li>阔腿 </li><li>灯笼</li><li>卡通</li>
+					</ul>
+					
+						<img src="img/m2.jpg" alt="">
+										
+				</div>
+
+				<div class="hid-menu" id="hidmenu4">
+					<ul class="hid-ul ul1">
+						<li>内衣</li><li>内衣套装</li><li>调整型内衣</li><li>收文胸</li><li>内裤</li><li>无痕内衣</li><li>性感内衣</li><li>运动内衣</li><li>抹胸</li>
+						
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>家居睡衣</li><li>睡衣套装</li><li>家居股</li><li>睡裙</li><li>甜美家居服</li><li>情侣睡衣</li><li>睡袍</li><li>性感睡衣</li>
+				
+						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>袜子</li><li>短袜</li><li>瘦腿袜</li><li>船袜</li><li>丝袜</li><li>堆堆袜</li><li>过膝袜</li><li>连体袜</li><li>打底袜</li>
+				
+					</ul>
+					
+						<img src="img/m12.jpg" alt="">
+					
+					
+				</div>
+
+				<div class="hid-menu" id="hidmenu5">
+					<ul class="hid-ul ul1">
+						<li>人气热销</li><li>凉鞋</li><li>单鞋</li><li>小白鞋</li><li>帆布鞋</li><li>运动鞋</li><li>厚底鞋</li><li>一脚蹬</li><li>高跟鞋</li><li>绑带美鞋</li><li>增高鞋</li><li>拖鞋</li><li>乐福鞋</li><li>牛津鞋</li>
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>热门推荐</li><li>当季热卖</li><li>玛丽珍鞋</li><li>高帮鞋</li><li>中跟单鞋</li><li>坡跟鞋</li><li>文艺单鞋</li><li>平底靴</li><li>甜美高跟</li><li>厚底帆布</li><li>懒人鞋</li>
+						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>经典直击</li><li>明星同款</li><li>韩版运动</li><li>韩范</li><li>情侣款</li><li>学生党</li><li>复古擦色</li><li>欧美范</li><li>学院休闲</li><li>舒适平底</li><li>板鞋</li><li>流苏</li><li>套脚</li><li>拉链款</li>
+						
+
+					</ul>
+					
+						<img src="img/menu5.jpg" alt="">	
+					
+				</div>
+
+				<div class="hid-menu" id="hidmenu6">
+					<ul class="hid-ul ul1">
+						<li>一周新品直击</li><li>短裤</li><li>T恤</li><li>休闲衫</li><li>POLO衫</li><li>牛仔裤</li><li>休闲裤</li><li>帆布鞋</li>
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>当季热卖</li><li>T恤</li><li>短裤</li><li>背心</li><li>POLO衫</li><li>防晒衣</li><li>牛仔裤</li><li>休闲裤</li><li>男士内衣</li><li>休闲鞋</li><li>人字拖</li>
+						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>潮流元素</li><li>九分裤</li><li>单宁风</li><li>一脚蹬</li><li>情侣装</li><li>棉麻风</li><li>工装裤</li><li>条纹装</li><li>麻底鞋</li>
+
+					</ul>
+					
+						<img src="img/m10.jpg" alt="">	
+					
+				</div>
+
+				<div class="hid-menu" id="hidmenu7">
+					<ul class="hid-ul ul1">
+						<li>热门</li><li>新品</li><li>双肩包</li><li>斜挎包</li><li>手提包</li><li>单肩包</li><li>百搭大包</li><li>迷你小包</li><li>复古包</li><li>旅行箱包</li><li>钱包</li><li>香风链条</li><li>手拿包</li>
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>款式</li><li>双肩包</li><li>斜挎包</li><li>单肩包</li><li>手提包</li><li>钱包</li><li>旅行箱</li><li>手拿包</li><li>帆布包</li><li>mini小包</li>
+						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>流行</li><li>链条包</li><li>贝壳包</li><li>水桶包</li><li>方形包</li><li>复古包</li><li>卡通包</li><li>铆钉包</li><li>邮差包</li><li>子母包</li><li>印花包</li><li>帆布包</li>
+						
+
+					</ul>
+					
+						<img src="img/menu7.jpg" alt="">	
+					
+				</div>
+
+
+				<div class="hid-menu" id="hidmenu1">
+					<ul class="hid-ul ul1">
+						<li>新品发布</li><li>衬衫</li><li>针织衫</li><li>字母T恤</li><li>绑带衬衫</li><li>俏皮露肩</li><li>夏日花卉</li>	
+					</ul>
+					<ul class="hid-ul ul2">
+					<li>当季热卖</li><li>短款上衣</li><li>纯色T恤</li><li>开衫</li><li>薄外套</li><li>蕾丝衫</li><li>雪纺衬衫</li><li>清凉透视</li><li>运动套装</li><li>格纹衬衫</li><li>情侣装</li>
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>新品发布</li><li>条纹</li><li>一字领</li><li>印花</li><li>流苏</li><li>字母</li><li>蕾丝</li><li>系带</li><li>荷叶边</li><li>性感V领</li><li>时尚挂脖</li><li>前短后长</li>
+					</ul>
+					
+						<img src="img/m13.jpg" alt="">
+				</div>
+
+				<div class="hid-menu" id="hidmenu2">
+					<ul class="hid-ul ul1">
+						<li>新品发布</li><li>韩范美裙</li><li>初夏新品</li><li>收腰裙</li><li>半身裙</li><li>牛仔裙</li><li>衬衫裙</li><li>百褶裙</li><li>包臀裙</li><li>大码裙子</li><li>长袖连衣裙</li><li>卫衣裙</li>
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>当季热卖</li><li>裙子套装</li><li>连衣裙</li><li>蕾丝裙</li><li>T恤裙</li><li>背带裙</li><li>小白裙</li><li>气质美裙</li><li>伞裙</li><li>针织裙</li><li>长裙</li>						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>女神最爱</li><li>甜美</li><li>时尚套装</li><li>韩范</li><li>气质</li><li>清新女神</li><li>一步裙</li><li>飘逸长裙</li><li>流苏</li>						
+					</ul>
+					
+						<img src="img/menu3.jpg" alt="">				
+					
+				</div>
+
+				<div class="hid-menu" id="hidmenu3">
+					<ul class="hid-ul ul1">
+						<li>新品发布</li><li>显瘦裤子榜</li><li>小脚裤</li><li>打底裤</li><li>阔腿裤</li><li>高腰裤</li><li>休闲裤</li><li>背带裤</li><li>大码裤子</li>					
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>当季热卖</li><li>破洞牛仔裤</li><li>磨边牛仔裤</li><li>显瘦牛仔裤</li><li>小脚牛仔裤</li><li>高腰牛仔裤</li><li>牛仔背带裤</li><li>黑色牛仔裤</li><li>纯棉打底裤</li><li>显瘦休闲裤</li>
+						
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>流行元素</li><li>修身显瘦</li><li>喇叭</li><li>韩版</li><li>纯棉</li><li>高腰</li><li>直筒</li><li>阔腿 </li><li>灯笼</li><li>卡通</li>
+					</ul>
+					
+						<img src="img/m2.jpg" alt="">
+										
+				</div>
+
+				<div class="hid-menu" id="hidmenu4">
+					<ul class="hid-ul ul1">
+						<li>内衣</li><li>内衣套装</li><li>调整型内衣</li><li>收文胸</li><li>内裤</li><li>无痕内衣</li><li>性感内衣</li><li>运动内衣</li><li>抹胸</li>
+						
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>家居睡衣</li><li>睡衣套装</li><li>家居股</li><li>睡裙</li><li>甜美家居服</li><li>情侣睡衣</li><li>睡袍</li><li>性感睡衣</li>
+				
+						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>袜子</li><li>短袜</li><li>瘦腿袜</li><li>船袜</li><li>丝袜</li><li>堆堆袜</li><li>过膝袜</li><li>连体袜</li><li>打底袜</li>
+				
+					</ul>
+					
+						<img src="img/m12.jpg" alt="">
+					
+					
+				</div>
+
+				<div class="hid-menu" id="hidmenu5">
+					<ul class="hid-ul ul1">
+						<li>人气热销</li><li>凉鞋</li><li>单鞋</li><li>小白鞋</li><li>帆布鞋</li><li>运动鞋</li><li>厚底鞋</li><li>一脚蹬</li><li>高跟鞋</li><li>绑带美鞋</li><li>增高鞋</li><li>拖鞋</li><li>乐福鞋</li><li>牛津鞋</li>
+						
+					</ul>
+					<ul class="hid-ul ul2">
+						<li>热门推荐</li><li>当季热卖</li><li>玛丽珍鞋</li><li>高帮鞋</li><li>中跟单鞋</li><li>坡跟鞋</li><li>文艺单鞋</li><li>平底靴</li><li>甜美高跟</li><li>厚底帆布</li><li>懒人鞋</li>
+						
+
+					</ul>
+					<ul class="hid-ul ul3">
+						<li>经典直击</li><li>明星同款</li><li>韩版运动</li><li>韩范</li><li>情侣款</li><li>学生党</li><li>复古擦色</li><li>欧美范</li><li>学院休闲</li><li>舒适平底</li><li>板鞋</li><li>流苏</li><li>套脚</li><li>拉链款</li>
+						
+
+					</ul>
+					
+						<img src="img/menu5.jpg" alt="">	
+					
+				</div>
+			</div>
+
+			<div class="sec-one-min">
+				<div class="move-img" id="move">
+					<img src="img/z1.jpg" alt="">
+					<div id="left">
+						<
+					</div>
+					<div id="right">
+						>
+					</div>
+
+					<ul>
+						<li class="hover"></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="sec-one-right">
+				<img src="img/r1.jpg" alt="" class="img1">
+				<img src="img/r2.jpg" alt="" class="img2">
+			</div>
+		</section>
+
+		<section class="section-two">
+<!-- 限时快抢页面 -->
+			<div class="sec-two">
+				<div class="two1">
+					<div class="two1t">
+						<img src="img/xskq.png" alt="">
+						<ul id="timebuy">
+							<li class="li">23</li>
+							<li>:</li>
+							<li class="li">59</li>
+							<li>:</li>
+							<li class="li">59</li>
+						</ul>
+					</div>
+					<img src="img/t1.png" alt="">
+				</div>
+				<div class="two2">
+					<img src="img/t2.jpg" alt="">
+				</div>
+				<div class="two3">
+					<img src="img/t3.png" alt="">
+				</div>
+				<div class="two4">
+					<div>
+						<img src="img/t5.jpg" alt="" height="147px;">
+					</div>
+					<div>
+						<img src="img/t4.jpg" alt="" height="147px">
+					</div>
+					
+				</div>
+			</div>
+
+		</section>
+
+		<section class="section-three">
+<!-- 蘑菇良品 -->
+			<div class="sec-thr"> 
+				<div class="sec-thr-top">
+					<div class="div1"></div>
+					<div><h2>蘑菇良品</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-thr-bot">
+					<div class="one">
+						<img src="img/6194.png" alt="">
+						<img src="img/6193.png" alt="">
+						<ul>
+							<li>初夏新款</li>
+							<li>懒人连衣裙</li>
+							<li>热买裤装</li>
+							<li>炫酷牛仔</li>
+							<li>WHT系列</li>
+							<li>衬衫</li>
+							<li>百搭T恤</li>
+							<li>必备打底</li>
+							<li>俏皮连衣裙</li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/6201.jpg" alt="">
+						<img src="img/6204.jpg" alt="">
+					</div>
+					<div class="thr">
+						<img src="img/6202.jpg" alt="">
+						<img src="img/6206.jpg" alt="">
+					</div>
+						<div class="four">
+						<img src="img/6203.jpg" alt="">
+						<img src="img/6205.jpg" alt="">
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<section class="section-four">
+<!-- 平牌站 -->
+			<div class="sec-fou">
+				<div class="sec-fou-top">
+					<div class="div1"></div>
+					<div><h2>品牌站</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fou-bot">
+					<div class="one">
+						<img src="img/6207.jpg" alt="">
+						<ul>
+							<li><img src="img/62015.jpg" alt=""></li>
+							<li><img src="img/62016.jpg" alt=""></li>
+							<li><img src="img/62017.jpg" alt=""></li>
+							<li><img src="img/62019.jpg" alt=""></li>	
+							<li><img src="img/62020.jpg" alt=""></li>
+							<li><img src="img/62021.png" alt=""></li>
+							<li><img src="img/62022.png" alt=""></li>
+							<li><img src="img/62023.jpg" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/6208.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/6209.jpg" alt="" width="200px" height="200px"><h4>夏装精选</h4></li>
+							<li><img src="img/62011.jpg" alt="" width="200px" height="200px"><h4>品质上衣</h4></li>
+							<li><img src="img/62025.jpg" alt="" width="200px" height="200px"><h4>时尚女裤</h4></li>
+							<li><img src="img/62010.jpg" alt="" width="200px" height="200px"><h4>舒适内搭</h4></li>
+							<li><img src="img/62012.jpg" alt="" width="200px" height="200px"><h4>气质美裙</h4></li>
+							<li><img src="img/62014.jpg" alt="" width="200px" height="200px"><h4>品牌精选</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section-five">
+<!-- 潮流女装 -->
+			<div class="sec-fiv">
+				<div class="sec-fiv-top">
+					<div class="div1"></div>
+					<div><h2>潮流女装</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fiv-bot">
+					<div class="one">
+						<img src="img/62051.jpg" alt="">
+						<ul>
+							<li><img src="img/62030.jpg" alt=""></li>
+							<li><img src="img/62031.jpg" alt=""></li>
+							<li><img src="img/62032.jpg" alt=""></li>
+							<li><img src="img/62033.jpg" alt=""></li>	
+							<li><img src="img/62034.jpg" alt=""></li>
+							<li><img src="img/62035.jpg" alt=""></li>
+							<li><img src="img/62036.jpg" alt=""></li>
+							<li><img src="img/62037.jpg" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/62050.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/62040.jpg" alt="" width="200px" height="200px"><h4>清纯半身裙</h4></li>
+							<li><img src="img/62041.jpg" alt="" width="200px" height="200px"><h4>淑女连衣裙</h4></li>
+							<li><img src="img/62042.jpg" alt="" width="200px" height="200px"><h4>时尚内衣</h4></li>
+							<li><img src="img/62043.png" alt="" width="200px" height="200px"><h4>宽松连衣裙</h4></li>
+							<li><img src="img/62044.png" alt="" width="200px" height="200px"><h4>可爱背心裙</h4></li>
+							<li><img src="img/62013.jpg" alt="" width="200px" height="200px"><h4>俏皮背带裙</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+<section class="section-five">
+<!-- 人气女鞋 -->
+			<div class="sec-fiv">
+				<div class="sec-fiv-top">
+					<div class="div1"></div>
+					<div><h2>人气女鞋</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fiv-bot">
+					<div class="one">
+						<img src="img/x1.jpg" alt="">
+						<ul>
+							<li><img src="img/x10.png" alt=""></li>
+							<li><img src="img/x9.png" alt=""></li>
+							<li><img src="img/x8.jpg" alt=""></li>
+							<li><img src="img/x7.jpg" alt=""></li>	
+							<li><img src="img/x6.jpg" alt=""></li>
+							<li><img src="img/x5.png" alt=""></li>
+							<li><img src="img/x4.png" alt=""></li>
+							<li><img src="img/x3.png" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/x2.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/x11.png" alt="" width="200px" height="200px"><h4>休闲帆布鞋</h4></li>
+							<li><img src="img/x12.png" alt="" width="200px" height="200px"><h4>个性凉鞋</h4></li>
+							<li><img src="img/x13.png" alt="" width="200px" height="200px"><h4>时尚运动鞋</h4></li>
+							<li><img src="img/x14.png" alt="" width="200px" height="200px"><h4>创意美鞋</h4></li>
+							<li><img src="img/x15.png" alt="" width="200px" height="200px"><h4>人字拖</h4></li>
+							<li><img src="img/x16.png" alt="" width="200px" height="200px"><h4>高跟凉鞋</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section-four">
+	<section class="section-three">
+<!-- 男友潮搭 -->
+			<div class="sec-thr" name="1f"> 
+				<div class="sec-thr-top">
+					<div class="div1"></div>
+					<div><h2>男友潮搭</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-thr-bot">
+					<div class="one">
+						<img src="img/n1.png" alt="">
+						<img src="img/n2.png" alt="">
+						<ul>
+							<li>T恤</li>
+							<li>POLO衫</li>
+							<li>衬衫</li>
+							<li>休闲裤</li>
+							<li>牛仔裤</li>
+							<li>短裤</li>
+							<li>凉鞋</li>
+							<li>休闲鞋</li>
+							<li>套装</li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/n3.jpg" alt="">
+						<img src="img/n4.jpg" alt="">
+					</div>
+					<div class="thr">
+						<img src="img/n7.jpg" alt="">
+						<img src="img/n5.jpg" alt="">
+					</div>
+						<div class="four">
+						<img src="img/n8.jpg" alt="">
+						<img src="img/n6.jpg" alt="">
+					</div>
+				</div>
+
+			</div>
+		</section>
+			<section class="section-three">
+<!-- 箱包配饰 -->
+			<div class="sec-six">
+				<div class="sec-six-top">
+					<div class="div1"></div>
+					<div><h2>箱包配饰</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-six-bot">
+					<div class="one">
+						<img src="img/b1.png" alt="">
+						<img src="img/b2.png" alt="">
+						<ul>
+							<li>新品包包</li>
+							<li>双肩包</li>
+							<li>斜挎包</li>
+							<li>锁骨链</li>
+							<li>耳饰</li>
+							<li>渔夫帽</li>
+							<li>手提包</li>
+							<li>发饰</li>
+							<li>单肩包</li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/b3.jpg" alt="">
+						<img src="img/b4.jpg" alt="">
+					</div>
+					<div class="thr">
+						<img src="img/b5.jpg" alt="">
+						<img src="img/b6.jpg" alt="">
+					</div>
+						<div class="four">
+						<img src="img/b7.jpg" alt="">
+						<img src="img/b8.jpg" alt="">
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+<section class="section-four">
+<!-- 运动瘦身 -->
+			<div class="sec-fou">
+				<div class="sec-fou-top">
+					<div class="div1"></div>
+					<div><h2>运动瘦身</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fou-bot">
+					<div class="one">
+						<img src="img/y1.png" alt="">
+						<ul>
+							<li><img src="img/y2.jpg" alt=""></li>
+							<li><img src="img/y3.jpg" alt=""></li>
+							<li><img src="img/y4.jpg" alt=""></li>
+							<li><img src="img/y5.jpg" alt=""></li>	
+							<li><img src="img/y6.jpg" alt=""></li>
+							<li><img src="img/y7.jpg" alt=""></li>
+							<li><img src="img/y8.jpg" alt=""></li>
+							<li><img src="img/y9.jpg" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/y10.png" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/y11.jpg" alt="" width="200px" height="200px"><h4>运动内衣</h4></li>
+							<li><img src="img/y12.jpg" alt="" width="200px" height="200px"><h4>运动套装</h4></li>
+							<li><img src="img/y13.jpg" alt="" width="200px" height="200px"><h4>运动器材</h4></li>
+							<li><img src="img/y14.jpg" alt="" width="200px" height="200px"><h4>防晒衣</h4></li>
+							<li><img src="img/y15.jpg" alt="" width="200px" height="200px"><h4>运动凉鞋</h4></li>
+							<li><img src="img/y16.jpg" alt="" width="200px" height="200px"><h4>运动鞋</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+	</section>
+
+<section class="section-five">
+<!-- 时尚美妆-->
+			<div class="sec-fiv">
+				<div class="sec-fiv-top">
+					<div class="div1"></div>
+					<div><h2>时尚美妆</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fiv-bot">
+					<div class="one">
+						<img src="img/mz.jpg" alt="">
+						<ul>
+							<li><img src="img/mz2.jpg" alt=""></li>
+							<li><img src="img/mz3.jpg" alt=""></li>
+							<li><img src="img/mz4.jpg" alt=""></li>
+							<li><img src="img/mz5.jpg" alt=""></li>	
+							<li><img src="img/mz9.jpg" alt=""></li>
+							<li><img src="img/mz7.jpg" alt=""></li>
+							<li><img src="img/mz8.jpg" alt=""></li>
+							<li><img src="img/mz11.jpg" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/mz12.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/mz13.jpg" alt="" width="200px" height="200px"><h4>面膜</h4></li>
+							<li><img src="img/mz14.jpg" alt="" width="200px" height="200px"><h4>护肤水</h4></li>
+							<li><img src="img/mz16.jpg" alt="" width="200px" height="200px"><h4>洗面奶</h4></li>
+							<li><img src="img/mz17.jpg" alt="" width="200px" height="200px"><h4>粉底</h4></li>
+							<li><img src="img/mz18.jpg" alt="" width="200px" height="200px"><h4>口红</h4></li>
+							<li><img src="img/mz19.jpg" alt="" width="200px" height="200px"><h4>香水</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-five">
+<!-- 家具生活-->
+			<div class="sec-fiv">
+				<div class="sec-fiv-top">
+					<div class="div1"></div>
+					<div><h2>家居生活</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fiv-bot">
+					<div class="one">
+						<img src="img/jz1.jpg" alt="">
+						<ul>
+							<li><img src="img/jj2.png" alt=""></li>
+							<li><img src="img/jj3.png" alt=""></li>
+							<li><img src="img/jj4.jpg" alt=""></li>
+							<li><img src="img/jj5.png" alt=""></li>	
+							<li><img src="img/jj6.jpg" alt=""></li>
+							<li><img src="img/jj7.png" alt=""></li>
+							<li><img src="img/jj9.png" alt=""></li>
+							<li><img src="img/jj8.png" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/jj10.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/jj11.png" alt="" width="200px" height="200px"><h4>租房小家具</h4></li>
+							<li><img src="img/jj12.png" alt="" width="200px" height="200px"><h4>晴雨伞</h4></li>
+							<li><img src="img/jj13.png" alt="" width="200px" height="200px"><h4>玻璃杯</h4></li>
+							<li><img src="img/jj14.png" alt="" width="200px" height="200px"><h4>宽美发神器</h4></li>
+							<li><img src="img/jj17.png" alt="" width="200px" height="200px"><h4>精致手机壳</h4></li>
+							<li><img src="img/jj16.png" alt="" width="200px" height="200px"><h4>收纳控</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+				<section class="section-five">
+<!--辣妈潮宝-->
+			<div class="sec-fiv">
+				<div class="sec-fiv-top">
+					<div class="div1"></div>
+					<div><h2>辣妈潮宝</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fiv-bot">
+					<div class="one">
+						<img src="img/lm.jpg" alt="">
+						<ul>
+							<li><img src="img/lm2.jpg" alt=""></li>
+							<li><img src="img/lm3.jpg" alt=""></li>
+							<li><img src="img/lm4.jpg" alt=""></li>
+							<li><img src="img/lm6.jpg" alt=""></li>	
+							<li><img src="img/lm7.jpg" alt=""></li>
+							<li><img src="img/lm8.jpg" alt=""></li>
+							<li><img src="img/lm9.jpg" alt=""></li>
+							<li><img src="img/lm10.jpg" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/lm11.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/lm12.jpg" alt="" width="200px" height="200px"><h4>小公主</h4></li>
+							<li><img src="img/lm14.jpg" alt="" width="200px" height="200px"><h4>小王子</h4></li>
+							<li><img src="img/lm16.jpg" alt="" width="200px" height="200px"><h4>时髦孕妈</h4></li>
+							<li><img src="img/lm15.jpg" alt="" width="200px" height="200px"><h4>舒适童鞋</h4></li>
+							<li><img src="img/lm17.jpg" alt="" width="200px" height="200px"><h4>益智玩具</h4></li>
+							<li><img src="img/lm18.jpg" alt="" width="200px" height="200px"><h4>必备用品</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+				<section class="section-five">
+<!-- 吃心绝对-->
+			<div class="sec-fiv">
+				<div class="sec-fiv-top">
+					<div class="div1"></div>
+					<div><h2>吃心绝对</h2></div>
+					<div class="div1"></div>
+				</div>
+				<div class="sec-fiv-bot">
+					<div class="one">
+						<img src="img/cx1.jpg" alt="">
+						<ul>
+							<li><img src="img/cx2.jpg" alt=""></li>
+							<li><img src="img/cx3.jpg" alt=""></li>
+							<li><img src="img/cx4.jpg" alt=""></li>
+							<li><img src="img/cx5.jpg" alt=""></li>	
+							<li><img src="img/cx6.jpg" alt=""></li>
+							<li><img src="img/cx7.jpg" alt=""></li>
+							<li><img src="img/cx8.jpg" alt=""></li>
+							<li><img src="img/cx9.jpg" alt=""></li>
+						</ul>
+					</div>
+					<div class="two">
+						<img src="img/cx10.jpg" alt="">
+					</div>
+					<div class="thr">
+						<ul>
+							<li><img src="img/cx11.jpg" alt="" width="200px" height="200px"><h4>点心</h4></li>
+							<li><img src="img/cx12.jpg" alt="" width="200px" height="200px"><h4>辣条</h4></li>
+							<li><img src="img/cx13.jpg" alt="" width="200px" height="200px"><h4>方便速食</h4></li>
+							<li><img src="img/cx14.jpg" alt="" width="200px" height="200px"><h4>花草茶</h4></li>
+							<li><img src="img/cx15.jpg" alt="" width="200px" height="200px"><h4>坚果</h4></li>
+							<li><img src="img/cx16.jpg" alt="" width="200px" height="200px"><h4>饼干/膨化</h4></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	<footer class="footer">
+		<div class="foot" id="top2">
+			<div class="one">
+				<img src="img/f1.png" alt="">
+				<p>营业执照注册号：330106000129004</p>
+				<p>增值电信业务经营许可证：浙B2-20110349</p>
+				<p>ICP备案号：浙ICP备10044327号-3</p>
+				<p><img src="img/f2.png" alt="">浙公网安备 33010602002329号</p>
+				<p>©2016 Mogujie.com 杭州卷瓜网络有限公司</p>
+			</div>
+			<div class="two">
+				<ul>
+					<li>公司</li>
+					<li>关于我们</li>
+					<li>招聘信息</li>
+					<li>联系我们</li>
+				</ul>
+				<ul>
+					<li>消费者</li>
+					<li>消费者服务</li>
+					<li>意见反馈</li>
+					<li>手机版下载</li>
+				</ul>
+				<ul>
+					<li>商家</li>
+					<li>商家入驻</li>
+					<li>商家后台</li>
+					<li>蘑菇商学院</li>
+					<li>商家社区</li>
+				</ul>
+			</div>
+			<div class="three">
+			<p>权威认证</p>
+			<img src="img/f5.png" alt="">
+			<img src="img/f4.png" alt="">
+			<img src="img/f3.png" alt="">
+		
+				
+			</div>
+		</div>
+		<div class="foot2">
+			<ul>
+				<li><a href="">友情链接：</a></li>
+				<li><a href="">淘粉吧</a></li>
+				<li><a href="">穿衣搭配</a></li>
+				<li><a href="">蘑菇街女装</a></li>
+				<li><a href="">蘑菇街男装</a></li>
+				<li><a href="">蘑菇街鞋子</a></li>
+				<li><a href="">蘑菇街包包</a></li>
+				<li><a href="">蘑菇街家居</a></li>
+				<li><a href="">家具网</a></li>
+				<li><a href="">时尚品牌网</a></li>
+				<li><a href="">装修</a></li>
+				<li><a href="">蘑菇街母婴</a></li>
+				<li><a href="">衣联网</a></li>
+				<li><a href="">播放网视频</a></li>
+				<li><a href="">慧聪网</a></li>
+			
+			</ul>
+		</div>
+	</footer>
+<div class="hidser" id="hidser">
+			<div class="img"><img src="img/mgj1.png" alt="" id="mgj"></div>
+			<div class="sercher">
+				<div class="ul" id="sul">
+					<ul>
+						<li id="serli"><p id="sp">搜商品</p><img src="img/向下箭头.gif" alt="">
+							<ul id="hidul">
+								<li>商品</li>
+								<li>店铺</li>
+							</ul>
+						</li>
+					</ul>
+			</div>
+
+			<div class="input">
+				<input type="text" value="夏季凉鞋穿搭" onfocus="if (value=='夏季凉鞋穿搭') {value=''}" onblur="if (value=='') {value='夏季凉鞋穿搭'}" ="">
+			</div>
+			<div class="img2"><img src="img/搜索1.jpg" alt="" class="img2" ></div>
+			</div>
+			
+			
+				
+</div>
+<aside>
+	<div  class="aside" id="aside">
+		<ul>
+			<li><a href="#"><img src="" alt=""><p>购物车</p></a></li>
+			<li><a href="#"><img src="" alt=""><p>优惠券</p></a></li>
+			<li><a href="#"><img src="" alt=""><p>钱包</p></a></li>
+			<li><a href="#"><img src="" alt=""><p>足迹</p></a></li>
+			<li id="top"><a href="#top1" ><img src="" alt="">top</a></li>
+		</ul>
+	</div>
+
+</aside>
+</body>
+</html>
